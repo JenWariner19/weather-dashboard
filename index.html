@@ -10,26 +10,42 @@
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    <header class="row">
-        <div class="col-12 header">
-         <h1 class="text-center p-3">Weather Dashboard</h1>
-        </div>
-    </header>
 
-    <div class="card search">
+  <header class="row">
+    <div class="col-12 header">
+     <h1 class="text-center p-3">Weather Dashboard</h1>
+    </div>
+</header>
+
+<div class="container mt-3">
+  <div class="row align-items-start">
+    <div class="col-3">
+      <div class="card border-dark">
         <div class="card-body">
           <h2 class="card-title">Search for a City:</h2>
-          <div class="card mb-2">
-            <input type="text" id="search-input" class="form-control" placeholder="Enter city">
+          <div class="card border-dark mb-2">
+            <input type="text" id="search-input" class="form-control" placeholder="Ex. New York, NY">
             </div>
-          <a href="#" class="btn btn-primary">Search</a>
+          <button id="search-Btn" class="btn btn-primary" type="button">Search</a>
         </div>
       </div>
-    
-      <div class="col-12 col-md-8">
-        <h2 class="subtitle">5-Day Forecast: <span id="weather-search-term"></span></h2>
-        <div id="weather-container" class="list-group"></div>
+    </div>
+    <div class="col-9">
+      <div class="col border border-dark flex-column p-3">
+        <div class="d-flex">
+          <p id="city-name" class="fs-2"></p>
+          <img id="current-icon" src="" alt=""></img>
+        </div>
+        <p id="temperature"></p>
+        <p id="humidity"></p>
+        <p id="wind-speed"></p>
+        <p id="UV-index"></p>   
       </div>
+      <h2 class="subtitle col-9">5-Day Forecast: <span id="weather-search-term"></span></h2>
+      <div id="future-container" class="list-group"></div>
+    </div>
+  </div>
+</div>
 
     <script src="./assets/script.js"></script>
 </body>
