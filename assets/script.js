@@ -8,7 +8,7 @@ var currentWS = document.getElementById("wind-speed");
 var currentIcon = document.getElementById("current-icon");
 var weatherHistory = JSON.parse(localStorage.getItem("cities"))||[];
 var currentDay = dayjs();
-console.log(weatherHistory);
+
 
 function displayHistory() {
     var weatherHistory = JSON.parse(localStorage.getItem("cities"))||[];
@@ -29,19 +29,21 @@ displayHistory()
 function getWeather(prevCity, prevState) {
     var cityValue = cityInput.value;
     var cityState = cityValue.split(",");
-    var city = prevCity|| cityState[0];
-    var state = prevState ||cityState[1];
+    var city = prevCity || cityState[0];
+    var state = prevState || cityState[1];
     var country = "US";
     var requestUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + state + "," + country + "&appid=" + apiKey;
-    weatherHistory.push({city,state})
+    if(!weatherHistory.map(obj => obj.city).includes(city) && !weatherHistory.map(obj => obj.state).includes(state))  {
+        weatherHistory.push({city,state})}
     localStorage.setItem("cities", JSON.stringify(weatherHistory))
     displayHistory()
-
+    console.log(requestUrl);
     fetch(requestUrl)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
+        console.log(data);
         var lat = data[0].lat
         var lon = data[0].lon
         var currentWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
@@ -65,6 +67,7 @@ function getWeather(prevCity, prevState) {
         })
         .then(function(data){
             console.log(data);
+            document.querySelector("#future-container").innerHTML = "";
             for(var i = 7; i < data.list.length; i+=8) {
                 console.log(data.list[i]);
                 var div = document.createElement("div")
@@ -92,4 +95,6 @@ function getWeather(prevCity, prevState) {
 }
 
 
-searchBtn.addEventListener("click", getWeather);
+searchBtn.addEventListener("click", function(){
+    getWeather()
+});
