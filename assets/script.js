@@ -35,7 +35,7 @@ function getWeather(prevCity, prevState) {
     var city = prevCity || cityState[0];
     var state = prevState || cityState[1];
     var country = "US";
-    var requestUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + state + "," + country + "&appid=" + apiKey;
+    var requestUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + state + "," + country + "&appid=" + apiKey;
     if(!weatherHistory.map(obj => obj.city).includes(city) && !weatherHistory.map(obj => obj.state).includes(state))  {
         weatherHistory.push({city,state})}
     localStorage.setItem("cities", JSON.stringify(weatherHistory))
