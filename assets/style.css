@@ -2,3 +2,11 @@
     background-color: navy;
     color: white; 
 }
+
+.saved {
+    font-size:26px;
+}
+
+.forecast {
+    font-size:20px;
+}
