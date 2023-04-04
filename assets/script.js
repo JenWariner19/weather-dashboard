@@ -18,7 +18,7 @@ function displayHistory() {
     for(var i=0; i < weatherHistory.length; i++) {
         var button = document.createElement("button")
         button.className = "col m-2 badge bg-primary text-white rounded";
-        button.innerText = weatherHistory[i].city + "," + weatherHistory[i].state;
+        button.innerText = weatherHistory[i].city;
         button.addEventListener("click", function(event) {
             var cityState = event.target.innerText.split(",");  
             getWeather(cityState[0], cityState[1])
@@ -35,9 +35,9 @@ function getWeather(prevCity, prevState) {
     var city = prevCity || cityState[0];
     var state = prevState || cityState[1];
     var country = "US";
-    var requestUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + state + "," + country + "&appid=" + apiKey;
-    if(!weatherHistory.map(obj => obj.city).includes(city) && !weatherHistory.map(obj => obj.state).includes(state))  {
-        weatherHistory.push({city,state})}
+    var requestUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + country + "&appid=" + apiKey;
+    if(!weatherHistory.map(obj => obj.city).includes(city))  {
+        weatherHistory.push({city})}
     localStorage.setItem("cities", JSON.stringify(weatherHistory))
     displayHistory()
     
